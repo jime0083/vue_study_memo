@@ -1,21 +1,27 @@
 <template>
     <div>
-      <h2>メモ一覧</h2>
-      <NoteItem v-for="note in notes" :key="note.id" :note="note" @delete-note="deleteNote" @edit-note="editNote" />
+      <ul>
+        <li v-for="note in notes" :key="note.id">
+          {{ note.text }}
+          <button @click="deleteNote(note.id)">削除</button>
+          <button @click="editNote(note)">編集</button>
+        </li>
+      </ul>
     </div>
   </template>
   
   <script>
-  import { mapState, mapMutations } from 'vuex';
-  import NoteItem from './NoteItem.vue';
+  import { mapGetters, mapMutations } from 'vuex';
   
   export default {
-    components: { NoteItem },
     computed: {
-      ...mapState(['notes'])
+      ...mapGetters(['getNotes']),
+      notes() {
+        return this.getNotes;
+      },
     },
     methods: {
-      ...mapMutations(['deleteNote', 'editNote'])
-    }
+      ...mapMutations(['deleteNote', 'editNote']),
+    },
   };
   </script>

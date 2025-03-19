@@ -11,11 +11,17 @@
   export default {
     data() {
       return {
-        newNote: ''
+        newNote: '',
       };
     },
     methods: {
-      ...mapMutations(['addNote'])
-    }
+      ...mapMutations(['addNote']),
+      addNote() {
+        if (this.newNote.trim() !== '') {
+          this.addNote({ id: Date.now(), text: this.newNote });
+          this.newNote = '';
+        }
+      },
+    },
   };
   </script>

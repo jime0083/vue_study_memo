@@ -1,27 +1,29 @@
 import { createStore } from 'vuex';
 
-const store = createStore({
-  state() {
-    return {
-      notes: [] // メモのリスト
-    };
+export default createStore({
+  state: {
+    notes: [],
   },
   mutations: {
     addNote(state, note) {
-      state.notes.push({ id: Date.now(), text: note });
+      state.notes.push(note);
     },
+
     deleteNote(state, noteId) {
       state.notes = state.notes.filter(note => note.id !== noteId);
     },
-    editNote(state, { noteId, newText }) {
-      const note = state.notes.find(note => note.id === noteId);
-      if (note) {
-        note.text = newText;
+
+    editNote(state, updatedNote) {
+      const index = state.notes.findIndex(note => note.id === updatedNote.id);
+      if (index !== -1) {
+        state.notes[index] = updatedNote;
       }
-    }
+    },
+
+
   },
   actions: {},
-  getters: {}
+  getters: {
+    getNotes: state => state.notes,
+  },
 });
-
-export default store;
