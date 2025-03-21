@@ -22,10 +22,6 @@ export default createStore({
         localStorage.setItem('notes', JSON.stringify(state.notes)); // ローカルストレージも更新
       }
     },
-    
-    
-
-    
   },
   getters: {
     getNotes: state => state.notes,
