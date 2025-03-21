@@ -11,15 +11,15 @@ import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
-      newNote: '', // ✅ 変数名を確認
+      newNote: '', 
     };
   },
   methods: {
     ...mapMutations({
-      addNoteToStore: 'addNote', // ✅ [] ではなく {} に修正
+      addNoteToStore: 'addNote', 
     }),
     addNote() {
-      if (this.newNote.trim() !== '') { // ✅ 正しい変数名を使用
+      if (this.newNote.trim() !== '') { 
         this.addNoteToStore({ id: Date.now(), text: this.newNote });
         this.newNote = '';
       }
